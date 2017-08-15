@@ -9,7 +9,7 @@ Version Changes:
  Version        | Changes 
  ------------- |:-------------:
  *1.0.0*      | ES6 Babel moduler 
-|
+
 
 ```javascript
   "scripts": {
