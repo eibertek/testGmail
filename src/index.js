@@ -12,6 +12,7 @@ app.server = http.createServer(app);
 // logger
 app.use(morgan('dev'));
 
+app.use('/public',express.static('dist/public'));
 // 3rd party middleware
 app.use(cors({
 	exposedHeaders: config.corsHeaders
