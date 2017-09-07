@@ -6,15 +6,19 @@
   "scripts": {
     "test": "jest",
     "build": "babel ./src/ --out-dir dist/ --ignore ./node_modules,./src/ui,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && nodemon dist/index.js",
     "build-ui": "webpack"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.4",
+    "gmail-send": "^1.2.11",
+    "google-auth-library": "^0.11.0",
+    "googleapis": "^21.3.0",
     "jest": "^20.0.4",
-    "morgan": "^1.8.2"
+    "morgan": "^1.8.2",
+    "nodemon": "^1.12.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
