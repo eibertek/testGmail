@@ -24,7 +24,7 @@ Next Tasks:
 
 Tareas­­:
 
-- Server Backend con ABM de empleados. 
+- Server Backend con ABM de empleados.  https://github.com/typicode/json-server
 ```javascript
 employees: [ {
     "name":"",
@@ -38,7 +38,7 @@ employees: [ {
 
 Auth / Simple Sign On
 
-Dashboard - Add, modifiy and delete Employees
+Dashboard - Add, modifiy and delete Employees 
           - editable mail template
           - Node cron job ( https://github.com/kelektiv/node-cron )
 Thanks to all
