@@ -100,9 +100,11 @@ function storeToken(token) {
 }
 
 function makeBody(to, from, subject, message) {
-    var str = ["Content-Type: text/plain; charset=\"UTF-8\"\n",
+    var str = [
+      //"Content-Type: text/plain; charset=\"UTF-8\"\n",
         "MIME-Version: 1.0\n",
         "Content-Transfer-Encoding: 7bit\n",
+        "Content-Type: text/html; charset=UTF-8\n",
         "to: ", to, "\n",
         "from: ", from, "\n",
         "subject: ", subject, "\n\n",
@@ -139,7 +141,9 @@ function listLabels(auth) {
       }
     }
   });
-  var raw = makeBody('mariano.eiberman@intive-fdv.com', 'mariano.eiberman@intive-fdv.com', 'test subject', 'test message');
+  var messBody ="<div dir=\"ltr\"><b>Bold example message text</b></div>\r\n\r\n";  
+
+  var raw = makeBody('mariano.eiberman@intive-fdv.com', 'mariano.eiberman@intive-fdv.com', 'test subject 2', messBody);
   gmail.users.messages.send({
         auth: auth,
         userId: 'me',

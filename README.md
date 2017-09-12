@@ -2,13 +2,14 @@
 
 # This is a BoilerPLate for creating a node.js project with ES6
 
-Actually This is only an skeleton, but the idea is get a BackendServer and frontend React Compiler
+Birthday App
 
 Version Changes:
 
  Version        | Changes 
  ------------- |:-------------:
  *1.0.0*      | ES6 Babel moduler 
+ *1.0.1*      | Added react-wysiwyg
 
 
 ```javascript
@@ -19,4 +20,25 @@ Version Changes:
   }
 ```
 
+Next Tasks:
+
+Tareas­­:
+
+- Server Backend con ABM de empleados. 
+```javascript
+employees: [ {
+    "name":"",
+    "lastname":"",
+    "birthday":"",
+    "proyect":"",
+    "startDay":"",
+    "picture":""
+    }]
+```
+
+Auth / Simple Sign On
+
+Dashboard - Add, modifiy and delete Employees
+          - editable mail template
+          - Node cron job ( https://github.com/kelektiv/node-cron )
 Thanks to all
