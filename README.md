@@ -41,4 +41,6 @@ Auth / Simple Sign On
 Dashboard - Add, modifiy and delete Employees 
           - editable mail template
           - Node cron job ( https://github.com/kelektiv/node-cron )
+
+Add golden layout - 1 screen with the employees grid, 1 for CRUD          
 Thanks to all
