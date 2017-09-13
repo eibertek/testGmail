@@ -10,6 +10,12 @@ var config = {
     path: BUILD_DIR,
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+            React: 'react',
+            ReactDOM: 'react-dom',
+    }),
+  ],  
  module : {
     loaders : [
       {
