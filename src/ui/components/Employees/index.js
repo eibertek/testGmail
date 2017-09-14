@@ -1,10 +1,12 @@
 import hypergrid from 'fin-hypergrid';
 
-export class Employees extends React.Component {
+class Employees extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            loaded:false,
+        };
     }
     componentDidCatch() {
         return <div>OOOPSSS</div>;
@@ -16,13 +18,9 @@ export class Employees extends React.Component {
     }
 
     componentDidMount() {
+        if(this.props.employees.length === 0) this.props.load();
         var grid = new hypergrid('#grid1',  {
-             data: [
-                 { 'symbol':'APPL', 'name':'Apple Inc.', 'prevclose':'93.13' },
-                 { 'symbol':'MSFT', 'name':'Microsoft Corporation', 'prevclose':'51.91' },
-                 { 'symbol':'TSLA', 'name':'Tesla Motors Inc.', 'prevclose':'196.40' },
-                 { 'symbol':'IBM', 'name':'International Business Machines Corp', 'prevclose':'155.35' }
-             ]
+             data: this.props.employees
          })
     }
 
@@ -30,3 +28,5 @@ export class Employees extends React.Component {
        return <div style={{backgroundColor:"white"}} id="grid1"></div>   
     }
 } 
+
+export default Employees;
