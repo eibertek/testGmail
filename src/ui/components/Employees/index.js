@@ -1,5 +1,5 @@
 import hypergrid from 'fin-hypergrid';
-
+import fetch from 'isomorphic-fetch';
 class Employees extends React.Component {
 
     constructor(props){
@@ -7,6 +7,13 @@ class Employees extends React.Component {
         this.state = {
             loaded:false,
         };
+        if(props.employees.length===0) {
+          fetch('http://localhost:3000/employees/').then((fetchedData)=>{
+              return fetchedData.json();
+          }).then((data)=>{
+              props.load(data);
+          });          
+        }
     }
     componentDidCatch() {
         return <div>OOOPSSS</div>;
@@ -19,71 +26,6 @@ class Employees extends React.Component {
 
     componentDidMount() {
         //Aqui agregar el fetch y luego dispatch la accion correspondiente
-        if(this.props.employees.length === 0) this.props.load([
-            {
-              "id": "meiberman05121984",
-              "name": "Mariano",
-              "lastname": "Eiberman",
-              "birthday": "05/12/1984",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },
-            {
-              "id": "meiberman045131",
-              "name": "Mariano",
-              "lastname": "Furriel",
-              "birthday": "05/11/1944",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },
-            {
-              "id": "meiberman04587184",
-              "name": "Daniel",
-              "lastname": "Mata",
-              "birthday": "05/12/1984",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },    
-            {
-              "id": "meiberman04587184",
-              "name": "Emanuel",
-              "lastname": "Suriano",
-              "birthday": "05/12/1984",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },        
-            {
-              "id": "meiberman04587184",
-              "name": "Marcos",
-              "lastname": "Marcos",
-              "birthday": "05/12/1984",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },        
-            {
-              "id": "meiberman04587184",
-              "name": "Maxi",
-              "lastname": "Cespedes",
-              "birthday": "05/12/1984",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },        
-            {
-              "id": "meiberman04587184",
-              "name": "Jose Daniel",
-              "lastname": "Sanchez",
-              "birthday": "05/12/1984",
-              "proyect": "Intelligize",
-              "startDay": "07/08/2017",
-              "picture": ""
-            },        
-          ]);
         var grid = new hypergrid('#grid1',  {
              data: this.props.employees
          })

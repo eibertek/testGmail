@@ -3,6 +3,7 @@ import GoldenLayout from 'golden-layout';
 import { connect } from 'react-redux';
 import {TemplateEditor} from '../TemplateEditor/index.js';
 import Employees from '../Employees/index.js';
+import Employee from '../Employees/employee.js';
 import { loadEmployees } from '../Employees/Actions/';
 
 export const Dashboard = (props) => {
@@ -16,18 +17,31 @@ export const Dashboard = (props) => {
         component: 'testItem',
         props: {value: 'variable2'}
        },
-        {
-        title: 'Employees',
-        type:'react-component',
-        component: 'testItem2',
-        props: {employees:props.employees, load:props.load}
-       }
+      {
+        type:'column',
+        content: [
+          {
+              title: 'Employees',
+              type:'react-component',
+              component: 'testItem2',
+              props: {employees:props.employees, load:props.load}
+          },
+          {
+              title: 'Employee',
+              type:'react-component',
+              component: 'testItem3',
+              props: {employees:props.employees, load:props.load}
+          }         
+                     
+        ]
+      }
     ]
   }]
 };   
 var myLayout = new GoldenLayout( config );
 myLayout.registerComponent( 'testItem' , TemplateEditor);
 myLayout.registerComponent( 'testItem2' , Employees);
+myLayout.registerComponent( 'testItem3' , Employee);
 myLayout.init();
 
 return <myLayout />;
