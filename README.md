@@ -42,5 +42,23 @@ Dashboard - Add, modifiy and delete Employees
           - editable mail template
           - Node cron job ( https://github.com/kelektiv/node-cron )
 
-Add golden layout - 1 screen with the employees grid, 1 for CRUD          
-Thanks to all
+Siguientes: agregar botones de 
+add employee (funcionlidad que va a mostrar una pantalla y permitira agregar datos y guardar)
+modifiy employee: boton al lado de cada item del layout
+agregar foto: en add employee
+
+Acciones:
+
+add_employee_save_pending
+add_employee_success
+-------------------------------
+modify_employee_load
+modify_employee_save
+modify_employee_success
+-------------------------------
+delete_employee_load
+delete_employee_success
+
+
+para guardar: dispatch el save_pending y mandar un fetch con el post y los datos
+una vez terminado mandar un dispatch de save_success
