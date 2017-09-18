@@ -1,4 +1,5 @@
 export const loadEmployees = (payload = []) => {
+  console.log(payload);          
   return {type:'SHOW', payload };
 }
 

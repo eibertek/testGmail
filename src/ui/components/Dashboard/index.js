@@ -6,6 +6,17 @@ import Employees from '../Employees/index.js';
 import Employee from '../Employees/employee.js';
 import { loadEmployees, add_employee_save_pending, add_employee_success } from '../Employees/Actions/';
 
+const mapDispatch = dispatch => {
+  return {
+    load: options => {
+      dispatch(loadEmployees(options))
+    },
+    add_employee_save_pending: () => {
+      dispatch(add_employee_save_pending())
+    },    
+  }
+};
+
 class Dashboard extends Component {
   constructor(props){
     super(props);
@@ -14,6 +25,7 @@ class Dashboard extends Component {
     }    
   } 
 getConfig(props) {
+  const {store} = this.context;
   return {
       content: [{
         id:'master0',
@@ -34,14 +46,14 @@ getConfig(props) {
                   title: 'Employees',
                   type:'react-component',
                   component: 'testItem2',
-                  props: {employees:props.employees, load:props.load}
+                  props: {store, employees:props.employees, load:props.load}
               },
               {
                   id:'employees2',
                   title: 'Employee',
                   type:'react-component',
                   component: 'testItem3',
-                  props: {employees:props.employees, add_employee_save_pending:props.add_employee_save_pending}
+                  props: {store, employees:props.employees, add_employee_save_pending:props.add_employee_save_pending}
               }         
             ]
           }
@@ -53,8 +65,8 @@ getConfig(props) {
  componentDidMount(){
     const myLayout = new GoldenLayout( this.getConfig(this.props) );
     //myLayout.registerComponent( 'testItem' , TemplateEditor);
-    myLayout.registerComponent( 'testItem2' , Employees);
-    myLayout.registerComponent( 'testItem3' , Employee);
+    myLayout.registerComponent( 'testItem2' ,  connect(state => state, mapDispatch)(Employees));
+    myLayout.registerComponent( 'testItem3' ,  connect(state => state, mapDispatch)(Employee));
     myLayout.init();
     this.setState({layout: myLayout});    
  }
@@ -78,16 +90,9 @@ getConfig(props) {
 
 };
 
-const mapDispatch = dispatch => {
-  return {
-    load: options => {
-      dispatch(loadEmployees(options))
-    },
-    add_employee_save_pending: () => {
-      dispatch(add_employee_save_pending())
-    },    
-  }
-};
+Dashboard.contextTypes = {
+  store: React.PropTypes.object
+}
 
-export default connect(state => state, mapDispatch)(Dashboard);
+export default Dashboard;
 

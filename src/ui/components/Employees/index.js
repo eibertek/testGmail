@@ -7,44 +7,54 @@ class Employees extends React.Component {
         this.state = {
             loaded:false,
         };
-        if(this.props.employees.length===0){
-            fetch('http://localhost:3000/employees/').then((fetchedData)=>{
+        var grid = null;
+        this.loadme = this.loadme.bind(this);
+        fetch('http://localhost:3000/employees/').then((fetchedData)=>{
                 return fetchedData.json();
             }).then((data)=>{
                 this.props.load(data);
             });          
-            console.log(props);                    
-        }
-
     }
+    
     componentDidCatch() {
         return <div>OOOPSSS</div>;
     }
 
+    componentDidUpdate(){
+        grid.repaint();
+        console.log('LOADME');
+    }
+
     componentDidMount() {
-        //Aqui agregar el fetch y luego dispatch la accion correspondiente
-        var grid = new hypergrid('#grid1',  {
-             data: this.props.employees.payload,
-             schema: [
-                 {name:'name', header:'name'},
-                 {name:'lastname', header:'lastname'},
-                 {name:'birthday', header:'birthday'},
-                 {name:'startDay', header:'startDay'},
-                 {name:'AddButton', header:'AddButton'},]
-         });
-        if(grid.behavior) {
-            grid.behavior.dataModel.getCell = (config, renderName)=>{
-                if(config.gridCell.x === 4 && config.gridCell.y > 0){
-                    //let style =  grid.cellRenderers.get('button');
-                    //return style;
-                }
-                return grid.cellRenderers.get(renderName);
-            };         
-        }
+        grid = new hypergrid('#grid1',  {
+            data: this.props.employees.payload,
+            schema: [
+                {name:'name', header:'name'},
+                {name:'lastname', header:'lastname'},
+                {name:'birthday', header:'birthday'},
+                {name:'startDay', header:'startDay'},
+                {name:'AddButton', header:'AddButton'},]
+        });  
+    }
+
+    loadme() {
+        this.props.employees.payload.push( {
+            "id": "meiberman05121984",
+            "name": "Mariano",
+            "lastname": "Furriel",
+            "birthday": "05/12/1984",
+            "proyect": "Intelligize",
+            "startDay": "07/08/2017",
+            "picture": ""
+          });
+        this.props.load(this.props.employees.payload);        
     }
 
     render() {
-       return <div style={{backgroundColor:"white"}} id="grid1"></div>   
+       return <div>
+        <div style={{backgroundColor:"white"}} id="grid1"></div>
+       <button onClick={this.loadme}>LOAD ME</button>
+       </div>   
     }
 } 
 
