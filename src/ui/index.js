@@ -6,9 +6,8 @@ import thunk from 'redux-thunk';
 import defStore from './components/Reducers';
 import Dashboard from './components/Dashboard/index.js';
 
-let store = compose(applyMiddleware(thunk))(createStore)(defStore);
+let store = compose(applyMiddleware(thunk))(createStore)(defStore, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-console.log(store.getState());
 const App = (props) => {
     return <Provider store={store}>
         <Dashboard />

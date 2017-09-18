@@ -7,28 +7,40 @@ class Employees extends React.Component {
         this.state = {
             loaded:false,
         };
-        if(props.employees.length===0) {
-          fetch('http://localhost:3000/employees/').then((fetchedData)=>{
-              return fetchedData.json();
-          }).then((data)=>{
-              props.load(data);
-          });          
+        if(this.props.employees.length===0){
+            fetch('http://localhost:3000/employees/').then((fetchedData)=>{
+                return fetchedData.json();
+            }).then((data)=>{
+                this.props.load(data);
+            });          
+            console.log(props);                    
         }
+
     }
     componentDidCatch() {
         return <div>OOOPSSS</div>;
     }
 
-    employeeList() {
-      const List = [{name:'a'},{name:'b'},{name:'c'},{name:'d'}];
-      return List.map((item) => <div>{item.name}</div>);
-    }
-
     componentDidMount() {
         //Aqui agregar el fetch y luego dispatch la accion correspondiente
         var grid = new hypergrid('#grid1',  {
-             data: this.props.employees
-         })
+             data: this.props.employees.payload,
+             schema: [
+                 {name:'name', header:'name'},
+                 {name:'lastname', header:'lastname'},
+                 {name:'birthday', header:'birthday'},
+                 {name:'startDay', header:'startDay'},
+                 {name:'AddButton', header:'AddButton'},]
+         });
+        if(grid.behavior) {
+            grid.behavior.dataModel.getCell = (config, renderName)=>{
+                if(config.gridCell.x === 4 && config.gridCell.y > 0){
+                    //let style =  grid.cellRenderers.get('button');
+                    //return style;
+                }
+                return grid.cellRenderers.get(renderName);
+            };         
+        }
     }
 
     render() {

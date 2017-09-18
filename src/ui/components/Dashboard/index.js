@@ -4,47 +4,78 @@ import { connect } from 'react-redux';
 import {TemplateEditor} from '../TemplateEditor/index.js';
 import Employees from '../Employees/index.js';
 import Employee from '../Employees/employee.js';
-import { loadEmployees } from '../Employees/Actions/';
+import { loadEmployees, add_employee_save_pending, add_employee_success } from '../Employees/Actions/';
 
-export const Dashboard = (props) => {
- const config =  {
-  content: [{
-    type: 'row',
-    content: [
-       {
-        title: 'Template Editor',
-        type:'react-component',
-        component: 'testItem',
-        props: {value: 'variable2'}
-       },
-      {
-        type:'column',
+class Dashboard extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      layout:null,
+    }    
+  } 
+getConfig(props) {
+  return {
+      content: [{
+        id:'master0',
+        type: 'row',
         content: [
+/*          {
+            title: 'Template Editor',
+            type:'react-component',
+            component: 'testItem',
+            props: {value: 'variable2'}
+          },*/
           {
-              title: 'Employees',
-              type:'react-component',
-              component: 'testItem2',
-              props: {employees:props.employees, load:props.load}
-          },
-          {
-              title: 'Employee',
-              type:'react-component',
-              component: 'testItem3',
-              props: {employees:props.employees, load:props.load}
-          }         
-                     
+            id:'master1',            
+            type:'column',
+            content: [
+              {
+                  id:'employees1',
+                  title: 'Employees',
+                  type:'react-component',
+                  component: 'testItem2',
+                  props: {employees:props.employees, load:props.load}
+              },
+              {
+                  id:'employees2',
+                  title: 'Employee',
+                  type:'react-component',
+                  component: 'testItem3',
+                  props: {employees:props.employees, add_employee_save_pending:props.add_employee_save_pending}
+              }         
+            ]
+          }
         ]
-      }
-    ]
-  }]
-};   
-var myLayout = new GoldenLayout( config );
-myLayout.registerComponent( 'testItem' , TemplateEditor);
-myLayout.registerComponent( 'testItem2' , Employees);
-myLayout.registerComponent( 'testItem3' , Employee);
-myLayout.init();
+      }]
+    };   
 
-return <myLayout />;
+}  
+ componentDidMount(){
+    const myLayout = new GoldenLayout( this.getConfig(this.props) );
+    //myLayout.registerComponent( 'testItem' , TemplateEditor);
+    myLayout.registerComponent( 'testItem2' , Employees);
+    myLayout.registerComponent( 'testItem3' , Employee);
+    myLayout.init();
+    this.setState({layout: myLayout});    
+ }
+  componentDidUpdate(){
+    // if(this.state.layout.root){
+    //   if(this.state.layout.root.getItemsById('employees1')[0]){
+    //       this.state.layout.root.getItemsById('employees1')[0].remove();
+    //   }
+    //   this.state.layout.root.getItemsById('master0')[0].addChild(              {
+    //               id:'employees3',
+    //               title: 'Employees',
+    //               type:'react-component',
+    //               component: 'testItem2',
+    //               props: {employees:this.props.employees, load:this.props.load}
+    //   });
+    // }
+  }
+ render() {
+    return <myLayout />;
+ }
+
 };
 
 const mapDispatch = dispatch => {
@@ -52,6 +83,9 @@ const mapDispatch = dispatch => {
     load: options => {
       dispatch(loadEmployees(options))
     },
+    add_employee_save_pending: () => {
+      dispatch(add_employee_save_pending())
+    },    
   }
 };
 
