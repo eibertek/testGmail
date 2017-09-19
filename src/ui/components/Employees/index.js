@@ -1,5 +1,6 @@
 //import hypergrid from 'fin-hypergrid';
 import fetch from 'isomorphic-fetch';
+//import styles from './styles.scss';
 class Employees extends React.Component {
     constructor(props){
         super(props);
@@ -25,16 +26,17 @@ class Employees extends React.Component {
                 <td>{employee.startDay}</td>
             </tr>
         ));
-        return <table className="table">
+        return <table className="table" styles={{ border: "1px solid white"}}>
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>birthday</th>
+                        <th>start day</th>
                     </tr>
                 </thead><tbody>{content}</tbody></table>;
     }
-    
+
     componentDidCatch() {
         return <div>OOOPSSS</div>;
     }
