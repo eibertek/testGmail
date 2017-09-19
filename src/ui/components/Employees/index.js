@@ -7,7 +7,6 @@ class Employees extends React.Component {
         this.state = {
             loaded:false,
         };
-        this.loadme = this.loadme.bind(this);
         this.list = this.list.bind(this);
         fetch('http://localhost:3000/employees/').then((fetchedData)=>{
                 return fetchedData.json();
@@ -49,23 +48,9 @@ class Employees extends React.Component {
 
     }
 
-    loadme() {
-        this.props.employees.payload.push( {
-            "id": "meiberman05121984",
-            "name": "Mariano",
-            "lastname": "Furriel",
-            "birthday": "05/12/1984",
-            "proyect": "Intelligize",
-            "startDay": "07/08/2017",
-            "picture": ""
-          });
-        this.props.load(this.props.employees.payload);        
-    }
-
     render() {
        return <div className="container">
        {this.list()}
-       <button onClick={this.loadme}>LOAD ME</button>
        </div>   
     }
 } 
