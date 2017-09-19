@@ -1,19 +1,38 @@
-import hypergrid from 'fin-hypergrid';
+//import hypergrid from 'fin-hypergrid';
 import fetch from 'isomorphic-fetch';
 class Employees extends React.Component {
-
     constructor(props){
         super(props);
         this.state = {
             loaded:false,
         };
-        var grid = null;
         this.loadme = this.loadme.bind(this);
+        this.list = this.list.bind(this);
         fetch('http://localhost:3000/employees/').then((fetchedData)=>{
                 return fetchedData.json();
             }).then((data)=>{
                 this.props.load(data);
             });          
+    }
+
+    list(){
+        if(!this.props.employees.payload ) return <div>Loading</div>;
+        const content = this.props.employees.payload.map((employee) => (
+            <tr>
+                <td>{employee.name}</td>
+                <td>{employee.lastname}</td>
+                <td>{employee.birthday}</td>
+                <td>{employee.startDay}</td>
+            </tr>
+        ));
+        return <table className="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>birthday</th>
+                    </tr>
+                </thead><tbody>{content}</tbody></table>;
     }
     
     componentDidCatch() {
@@ -21,20 +40,11 @@ class Employees extends React.Component {
     }
 
     componentDidUpdate(){
-        grid.repaint();
         console.log('LOADME');
     }
 
     componentDidMount() {
-        grid = new hypergrid('#grid1',  {
-            data: this.props.employees.payload,
-            schema: [
-                {name:'name', header:'name'},
-                {name:'lastname', header:'lastname'},
-                {name:'birthday', header:'birthday'},
-                {name:'startDay', header:'startDay'},
-                {name:'AddButton', header:'AddButton'},]
-        });  
+
     }
 
     loadme() {
@@ -51,8 +61,8 @@ class Employees extends React.Component {
     }
 
     render() {
-       return <div>
-        <div style={{backgroundColor:"white"}} id="grid1"></div>
+       return <div className="container">
+       {this.list()}
        <button onClick={this.loadme}>LOAD ME</button>
        </div>   
     }
