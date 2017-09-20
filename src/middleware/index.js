@@ -31,5 +31,9 @@ export default ({ config }) => {
 			});
   });
   
+  	   routes.get('/template', (req, res) => {
+			// aca tengo que traer los que cumplen años hoy y mostrarlos en un html ooooo levantar directamente un reactapp 
+			res.sendFile(path.join(__dirname + './../views/index.html'));
+	  });
 	return routes;
 }
