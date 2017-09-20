@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import ImageUploader from 'react-images-upload';
-import {getEmployees, postEmployee} from '../../utils/fetchHelper';
+import {getEmployees, postEmployee, UpdateEmployee} from '../../utils/fetchHelper';
 import styles from './styles.scss';
 
 class Employee extends React.Component {
@@ -8,6 +8,7 @@ class Employee extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            id: '',
             name: props.employeeData.name ? props.employeeData.name : '',
             lastname:props.employeeData.lastname ? props.employeeData.lastname : '',
             birthday:props.employeeData.birthday ? props.employeeData.birthday : '',
@@ -31,8 +32,8 @@ class Employee extends React.Component {
     }
 
     componentWillReceiveProps(props){
-        console.log(props.status);
         this.setState({
+            id: props.employeeData.id ? props.employeeData.id : '',
             name: props.employeeData.name ? props.employeeData.name : '',
             lastname: props.employeeData.lastname ? props.employeeData.lastname : '',
             birthday: props.employeeData.birthday ? props.employeeData.birthday : '',
@@ -41,14 +42,18 @@ class Employee extends React.Component {
         });
     }
     loadme() {
-        postEmployee((result)=>{ alert('ready'), console.log(result)}, { id: this.state.id, 
-                                              name: this.state.name, 
-                                              lastname: this.state.lastname, 
-                                              birthday: this.state.birthday, 
-                                              startDay: this.state.startDay,
-                                              picture: this.state.picture
-                                            });
-
+        const payload = { id: this.state.id, 
+            name: this.state.name, 
+            lastname: this.state.lastname, 
+            birthday: this.state.birthday, 
+            startDay: this.state.startDay,
+            picture: this.state.picture
+          };
+        if(this.props.status === 'MODIFY_EMPLOYEE_PENDING') {
+            UpdateEmployee((result)=>{ alert('ready'), console.log(result)}, payload);
+        }else{
+            postEmployee((result)=>{ alert('ready'), console.log(result)}, payload);
+        }
         getEmployees( this.props.load);    
     }
     

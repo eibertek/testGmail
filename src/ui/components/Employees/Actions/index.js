@@ -1,5 +1,4 @@
 export const loadEmployees = (payload = []) => {
-  console.log(payload);          
   return {type:'SHOW', payload };
 }
 
@@ -15,7 +14,9 @@ export const modify_employee_load = (employee) => {
   return { type:'MODIFY_EMPLOYEE_PENDING', status:'MODIFY_EMPLOYEE_PENDING', employeeData: employee}
 }
 const modify_employee_save = () => {}
-const modify_employee_success = () => {}
+const modify_employee_success = () => {
+  return { type:'MODIFY_EMPLOYEE_SUCCESS', status:'MODIFY_EMPLOYEE_SUCCESS', employeeData: employee}  
+}
 
 /* delete employee actions */
 const delete_employee_load = () => {}

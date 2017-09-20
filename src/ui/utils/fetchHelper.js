@@ -22,7 +22,6 @@ export const getEmployees =(callback, ...additional) => {
 
 export const postEmployee =(callback, data = {}) => {
     const {id, name, lastname, birthday, startDay, picture} = data;
-    console.log('LLEGO ACA', data, {id, name, lastname, birthday, startDay,picture});
     return Request({
         url: URL+EMPLOYEES,
         type:'POST',
@@ -33,6 +32,26 @@ export const postEmployee =(callback, data = {}) => {
     })
 }
 
+export const UpdateEmployee =(callback, data = {}) => {
+    const {id, name, lastname, birthday, startDay, picture} = data;
+    return Request({
+        url: URL+EMPLOYEES+'/'+id,
+        type:'PUT',
+        body: {
+            name, lastname, birthday, startDay, picture
+        },
+        callback: callback
+    })
+}
+
+export const DeleteEmployee =(callback, data = {}) => {
+    const {id, name, lastname, birthday, startDay, picture} = data;
+    return Request({
+        url: URL+EMPLOYEES+'/'+id,
+        type:'DELETE',
+        callback: callback
+    })
+}
 
 const makeOptions = (type, body) => {
     return {

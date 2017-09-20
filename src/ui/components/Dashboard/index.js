@@ -40,12 +40,12 @@ getConfig(props) {
         id:'master0',
         type: 'row',
         content: [
-/*          {
+          {
             title: 'Template Editor',
             type:'react-component',
             component: 'testItem',
             props: {value: 'variable2'}
-          },*/
+          },
           {
             id:'master1',            
             type:'column',
@@ -73,7 +73,7 @@ getConfig(props) {
 }  
  componentDidMount(){
     const myLayout = new GoldenLayout( this.getConfig(this.props) );
-    //myLayout.registerComponent( 'testItem' , TemplateEditor);
+    myLayout.registerComponent( 'testItem' , TemplateEditor);
     myLayout.registerComponent( 'testItem2' ,  connect(state => state, mapDispatch)(Employees));
     myLayout.registerComponent( 'testItem3' ,  connect(state => state.employee, mapDispatch)(Employee));
     myLayout.init();
