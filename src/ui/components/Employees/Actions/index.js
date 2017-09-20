@@ -11,7 +11,9 @@ export const add_employee_success = () => {
 }
 
 /* MOdify employee actions */
-const modify_employee_load = () => {}
+export const modify_employee_load = (employee) => {
+  return { type:'MODIFY_EMPLOYEE_PENDING', status:'MODIFY_EMPLOYEE_PENDING', employeeData: employee}
+}
 const modify_employee_save = () => {}
 const modify_employee_success = () => {}
 

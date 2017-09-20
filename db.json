@@ -17,15 +17,29 @@
       "proyect": "Intelligize",
       "startDay": "07/08/2017",
       "picture": ""
+    },
+    {
+      "name": "Marcos",
+      "lastname": "Mezzabota",
+      "birthday": "01/05/1984",
+      "startDay": "01/01/2016",
+      "id": "HyDPeTyj-"
+    },
+    {
+      "name": "sdasd",
+      "lastname": "sadsadas",
+      "birthday": "sdsadas",
+      "startDay": "ddadas",
+      "id": "HyhQRpyib"
     }
   ],
-  "emailTemplates":[
+  "emailTemplates": [
     {
-    "id":"0",
-    "name":"BirthDays",
-    "contentType":"",
-    "content":"",
-    "cron":""
+      "id": "0",
+      "name": "BirthDays",
+      "contentType": "",
+      "content": "",
+      "cron": ""
     }
   ]
 }
