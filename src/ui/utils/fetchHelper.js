@@ -21,13 +21,13 @@ export const getEmployees =(callback, ...additional) => {
 }
 
 export const postEmployee =(callback, data = {}) => {
-    const {id, name, lastname, birthday, startDay} = data;
-    console.log('LLEGO ACA', data, {id, name, lastname, birthday, startDay});
+    const {id, name, lastname, birthday, startDay, picture} = data;
+    console.log('LLEGO ACA', data, {id, name, lastname, birthday, startDay,picture});
     return Request({
         url: URL+EMPLOYEES,
         type:'POST',
         body: {
-            id, name, lastname, birthday, startDay
+            id, name, lastname, birthday, startDay, picture
         },
         callback: callback
     })

@@ -28,6 +28,10 @@ var config = {
         loader : ['style-loader','css-loader', 'sass-loader'],
       },      
       {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },      
+      {
         test : /\.js?/,
         include : APP_DIR,
         loader : 'babel-loader',

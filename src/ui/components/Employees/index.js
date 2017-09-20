@@ -20,6 +20,7 @@ class Employees extends React.Component {
                 <td>{employee.lastname}</td>
                 <td>{employee.birthday}</td>
                 <td>{employee.startDay}</td>
+                <td><img src={employee.picture} width="60px" height="60px" /></td>
                 <td>
                     <button onClick={(evt) => this.action(evt, employee)}>Modificar</button>
                     <button>Eliminar</button>                    
