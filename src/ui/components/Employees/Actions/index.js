@@ -18,6 +18,15 @@ const modify_employee_success = () => {
   return { type:'MODIFY_EMPLOYEE_SUCCESS', status:'MODIFY_EMPLOYEE_SUCCESS', employeeData: employee}  
 }
 
+export const modify_employee_cancel = () => {
+  return { type:'MODIFY_EMPLOYEE_CANCEL', status:'MODIFY_EMPLOYEE_CANCEL'}  
+}
+
 /* delete employee actions */
-const delete_employee_load = () => {}
-const delete_employee_success = () => {}
+export const delete_employee_pending = (employee) => {
+  console.log(employee);
+  return { type:'DELETE_EMPLOYEE_PENDING', status:'DELETE_EMPLOYEE_PENDING', employeeData: employee}
+}
+export const delete_employee_success = () => {
+  return { type:'DELETE_EMPLOYEE_SUCCESS', status:'DELETE_EMPLOYEE_SUCCESS', employeeData: {}}  
+}

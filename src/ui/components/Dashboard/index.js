@@ -7,7 +7,11 @@ import Employee from '../Employees/employee.js';
 import { loadEmployees, 
          add_employee_save_pending, 
          add_employee_success,
-         modify_employee_load } from '../Employees/Actions/';
+         modify_employee_load,
+         modify_employee_cancel,
+         modify_employee_save,
+         delete_employee_pending,
+         delete_employee_success } from '../Employees/Actions/';
 
 const mapDispatch = dispatch => {
   return {
@@ -17,12 +21,24 @@ const mapDispatch = dispatch => {
     add_employee_save_pending: () => {
       dispatch(add_employee_save_pending())
     },    
+    add_employee_save_success: () => {
+      dispatch(add_employee_success())
+    },    
     load_employee_data: (employee) => {
       dispatch(modify_employee_load(employee))
     },        
     save_employee_data: (employee) => {
       dispatch(modify_employee_save(employee))
-    },        
+    },   
+    save_employee_cancel: (employee) => {
+      dispatch(modify_employee_cancel())
+    },     
+    delete_employee: (employee) => {
+      dispatch(delete_employee_pending(employee))
+    },          
+    delete_employee_success: (employee) => {
+      dispatch(delete_employee_success(employee))
+    },      
   }
 };
 
@@ -40,29 +56,29 @@ getConfig(props) {
         id:'master0',
         type: 'row',
         content: [
-          {
+/*          {
             title: 'Template Editor',
             type:'react-component',
             component: 'testItem',
             props: {value: 'variable2'}
+          },*/
+          {
+            id:'employees1',
+            title: 'Employees',
+            type:'react-component',
+            component: 'testItem2',
+            props: {store, employees:props.employees, load:props.load, load_employee_data:props.load_employee_data}
           },
           {
             id:'master1',            
             type:'column',
             content: [
               {
-                  id:'employees1',
-                  title: 'Employees',
-                  type:'react-component',
-                  component: 'testItem2',
-                  props: {store, employees:props.employees, load:props.load, load_employee_data:props.load_employee_data}
-              },
-              {
                   id:'employees2',
                   title: 'Employee',
                   type:'react-component',
                   component: 'testItem3',
-                  props: {store, employeeData: props.employeeData}
+                  props: {store, status: props.status, employeeData: props.employeeData}
               }         
             ]
           }

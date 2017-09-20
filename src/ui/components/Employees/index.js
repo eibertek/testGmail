@@ -1,6 +1,6 @@
 //import hypergrid from 'fin-hypergrid';
 import styles from './styles.scss';
-import {getEmployees} from '../../utils/fetchHelper';
+import {getEmployees, DeleteEmployee} from '../../utils/fetchHelper';
 class Employees extends React.Component {
     constructor(props){
         super(props);
@@ -22,8 +22,8 @@ class Employees extends React.Component {
                 <td>{employee.startDay}</td>
                 <td><img src={employee.picture} width="60px" height="60px" /></td>
                 <td>
-                    <button onClick={(evt) => this.action(evt, employee)}>Modificar</button>
-                    <button>Eliminar</button>                    
+                    <button onClick={(evt) => this.newEmployee(evt, employee)}>Modificar</button>
+                    <button onClick={(evt) => this.deleteEmployee(evt, employee)}>Eliminar</button>                    
                 </td>
             </tr>
         ));
@@ -38,11 +38,18 @@ class Employees extends React.Component {
                 </thead><tbody>{content}</tbody></table>;
     }
 
-    action(evt, data) {
-      //  console.log(evt, data);
+    newEmployee(evt, data) {
         this.props.load_employee_data(data);
     }
 
+    deleteEmployee(evt, data) {
+          this.props.delete_employee(data);
+          DeleteEmployee((result)=>{ 
+                    this.props.delete_employee_success(result); 
+                    getEmployees( this.props.load); 
+                    console.log(result)}, data);
+      }
+  
     componentDidCatch() {
         return <div>OOOPSSS</div>;
     }
