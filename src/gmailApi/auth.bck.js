@@ -6,18 +6,15 @@ var base64Img = require('base64-img');
 var lib = require('./lib.js');
 
 // Load client secrets from a local file.
-exports.sendBirthdayMail = function() {
-  fs.readFile('src/client_secret.json', function processClientSecrets(err, content) {
-    if (err) {
-      console.log('Error loading client secret file: ' + err);
-      return 'Error loading client secret file: ' + err;
-    }
-    // Authorize a client with the loaded credentials, then call the
-    // Gmail API.
-    lib.authorize(JSON.parse(content), sendMail);
-  });
-  
-}
+fs.readFile('src/client_secret.json', function processClientSecrets(err, content) {
+  if (err) {
+    console.log('Error loading client secret file: ' + err);
+    return;
+  }
+  // Authorize a client with the loaded credentials, then call the
+  // Gmail API.
+  lib.authorize(JSON.parse(content), sendMail);
+});
 
 function makeBody(to, from, subject, message, file) {
   var str = [
@@ -77,7 +74,7 @@ function attachMent(imgData) {
 }
 
 function sendMail(auth){
-  var file = base64Img.base64Sync('./img/birthdays.jpg');
+  var file = base64Img.base64Sync('./otros.jpg');
   var gmail = google.gmail('v1');  
   var messBody = 'The actual message text goes <b> here </b> <img src="cid:birthday" ></img> \r\n\r\n';      
   var raw = makeBody('mariano.eiberman@intive-fdv.com', 'mariano.eiberman@intive-fdv.com', 'Hoy cumplen anios!!', messBody, file);

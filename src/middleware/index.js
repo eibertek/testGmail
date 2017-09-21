@@ -9,11 +9,15 @@ export default ({ config }) => {
 
 	routes.get('/template', (req, res) => {
 		// aca tengo que traer los que cumplen años hoy y mostrarlos en un html ooooo levantar directamente un reactapp 
-		fetch('http://localhost:3000/employees?birthday=05/12/1984')
+		let today = new Date();
+		let todayString = today.getDate().toString()+'/'+ (today.getMonth() < 10 ? '0':'') + (today.getMonth()+1).toString();
+		console.log(todayString);
+		fetch('http://localhost:3000/employees?birthday='+todayString)
 		.then(function(response){
 				return response.json();
 		})
 		.then(function(json){
+			console.log(json);
 				return res.render('template_birthdays', {data:json});				
 		});
 
