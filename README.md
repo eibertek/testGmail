@@ -38,27 +38,21 @@ employees: [ {
 
 Auth / Simple Sign On
 
-Dashboard - Add, modifiy and delete Employees 
-          - editable mail template
-          - Node cron job ( https://github.com/kelektiv/node-cron )
+envio de mails:
 
-Siguientes: agregar botones de 
-add employee (funcionlidad que va a mostrar una pantalla y permitira agregar datos y guardar)
-modifiy employee: boton al lado de cada item del layout
-agregar foto: en add employee
+1 - tengo la pagina de template, que carga los cumpleaños dle dia de hoy
+2 - imgtourl verifica que no exista la imagen (si existe la borra) y la crea con los cumpleaños de hoy
+3 - el chrome enviará los datos de cumpleaños 
 
-Acciones:
+Template --> imgtourl --> sendmail
 
-add_employee_save_pending
-add_employee_success
--------------------------------
-modify_employee_load
-modify_employee_save
-modify_employee_success
--------------------------------
-delete_employee_load
-delete_employee_success
+Si no hay cumpleaños, no deberia enviar mail.
 
+servicio que traiga todos los cumpleaños del dia. y segun estos genere el html para enviar a urltoimg
 
-para guardar: dispatch el save_pending y mandar un fetch con el post y los datos
-una vez terminado mandar un dispatch de save_success
+el cron hara un fetch del dia y enviara los cumpleaños a un archivo temporal.
+este archivo temporal tendra un json con los cumpleaños del dia y su data.
+
+la web template traera este archivo y creara el formato
+el img tourl verificara la cantidad de cumpleaños y si hay, generara la imagen
+el snedmail verificara la cantidad de cumpleaños y si hay, enviara el mail

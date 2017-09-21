@@ -12,7 +12,7 @@ export default ({ config }) => {
 		let today = new Date();
 		let todayString = today.getDate().toString()+'/'+ (today.getMonth() < 10 ? '0':'') + (today.getMonth()+1).toString();
 		console.log(todayString);
-		fetch('http://localhost:3000/employees?birthday='+todayString)
+		fetch('http://localhost:3000/employees?birthday='+'05/12')
 		.then(function(response){
 				return response.json();
 		})
