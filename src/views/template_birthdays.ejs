@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cumpleaños!!</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Arial';
+    }
+    div.container {
+      position: relative 
+    }
+
+   .title1 {
+      color:#5050ff;
+      position:absolute;
+      font-size: 25px;
+      left: 10%;
+    }
+
+    .title1 li {
+      font-size:20px;
+    }
+  </style>
+</head>
+<body>
+  <div><img src="/public/intiveFDVlogo.png" /></div>
+  <div class="container">
+      <div class="title1">
+         ---- CUMPLEAÑOS!!! ---- <br/>
+          <% data.forEach(function(data) { %>
+            <li><%= data.name %> <%= data.lastname %> (<%= data.birthday %>)</li>
+          <% }); %>    
+          <br/>
+          Les deseamos a todos un muy feliz día, de parte del staff de Intive-fdv
+      </div>
+  </div>
+</body>
+</html>

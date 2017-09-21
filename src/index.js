@@ -2,17 +2,20 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import path from 'path';
 import bodyParser from 'body-parser';
 import middleware from './middleware';
 import config from './config.json';
 
 let app = express();
 app.server = http.createServer(app);
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // logger
 app.use(morgan('dev'));
 
-app.use('/public',express.static('dist/public'));
+app.use('/public',express.static('dist/public/'));
 // 3rd party middleware
 app.use(cors({
 	exposedHeaders: config.corsHeaders

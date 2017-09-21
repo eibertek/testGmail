@@ -4,6 +4,7 @@ var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
+//var image = require('../otros.jpg');
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/gmail-nodejs-quickstart.json
@@ -141,7 +142,8 @@ function listLabels(auth) {
       }
     }
   });
-  var messBody ="<div dir=\"ltr\"><b>Bold example message text</b></div>\r\n\r\n";  
+  
+  var messBody ="<div dir=\"ltr\"><img src=\"cid:myimage\" /></div>\r\n\r\n";  
 
   var raw = makeBody('mariano.eiberman@intive-fdv.com', 'mariano.eiberman@intive-fdv.com', 'test subject 2', messBody);
   gmail.users.messages.send({
