@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import ImageUploader from 'react-images-upload';
 import {getEmployees, postEmployee, UpdateEmployee} from '../../utils/fetchHelper';
+import {validDate} from '../../utils/dateUtils';
 import styles from './styles.scss';
 
 class Employee extends React.Component {
@@ -22,6 +23,8 @@ class Employee extends React.Component {
     }
 
     add(evt) {
+        if(!validDate(this.state.birthday)) return console.log('Cumpleaños no valido');
+        if(this.state.startDay != '' && !validDate(this.state.startDay)) return console.log('Ingreso no valido');
         if(this.state.name === '' || this.state.lastname === '' || this.state.birthday === '') return;
         const payload = { id: this.state.id ? this.state.id: null, 
             name: this.state.name, 

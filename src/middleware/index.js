@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import path from 'path';
 import fetch from 'isomorphic-fetch';
+import moment from 'moment';
 import { version } from '../../package.json';
 
 const sendMail =  require('gmail-send');
@@ -9,18 +10,18 @@ export default ({ config }) => {
 
 	routes.get('/template', (req, res) => {
 		// aca tengo que traer los que cumplen años hoy y mostrarlos en un html ooooo levantar directamente un reactapp 
-		let today = new Date();
-		let todayString = today.getDate().toString()+'/'+ (today.getMonth() < 10 ? '0':'') + (today.getMonth()+1).toString();
-		console.log(todayString);
-		fetch('http://localhost:3000/employees?birthday='+'05/12')
+		let today = new moment();
+		fetch('http://localhost:3000/employees')
 		.then(function(response){
 				return response.json();
 		})
 		.then(function(json){
-			console.log(json);
-				return res.render('template_birthdays', {data:json});				
+				const employees = json.filter((employee)=>{
+					const birthday = moment(employee.birthday, 'DD/MM/YYYY');
+					return (birthday.date() === today.date() && birthday.month() === today.month());
+				});
+				return res.render('template_birthdays', {data:employees});				
 		});
-
   });
 
   routes.get('/', (req, res) => {

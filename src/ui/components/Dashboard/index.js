@@ -56,12 +56,6 @@ getConfig(props) {
         id:'master0',
         type: 'row',
         content: [
-/*          {
-            title: 'Template Editor',
-            type:'react-component',
-            component: 'testItem',
-            props: {value: 'variable2'}
-          },*/
           {
             id:'employees1',
             title: 'Employees',

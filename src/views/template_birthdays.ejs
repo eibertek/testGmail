@@ -11,32 +11,44 @@
       font-family: 'Arial';
     }
     div.container {
-      position: relative 
     }
 
    .title1 {
       color:#5050ff;
-      position:absolute;
       font-size: 25px;
-      left: 10%;
+      margin: 10px;
     }
 
-    .title1 li {
+    .birthdays_grid {
       font-size:20px;
     }
+
+    .picture {
+      font-size:30px;
+      text-align: center;
+    }
+
+    .employee {}    
   </style>
 </head>
 <body>
   <div><img src="/public/intiveFDVlogo.png" /></div>
   <div class="container">
       <div class="title1">
-         ---- CUMPLEAÑOS!!! ---- <br/>
-          <% data.forEach(function(data) { %>
-            <li><%= data.name %> <%= data.lastname %> (<%= data.birthday %>)</li>
-          <% }); %>    
-          <br/>
-          Les deseamos a todos un muy feliz día, de parte del staff de Intive-fdv
+         CUMPLEAÑOS DEL DIA DE HOY!!!
       </div>
+      <div class="birthdays_grid">
+          <% data.forEach(function(data) { %>
+            <div class="employee">
+              <div class="picture">
+                <img src="<%= data.picture %>" width="100px" height="100px" ><%= data.name %> <%= data.lastname %> (<%= data.birthday %>)</img>
+              </div>
+            </div>
+          <% }); %>    
+      </div>
+      <div class="title1">
+        Les deseamos a todos un muy feliz día, de parte del staff de Intive-fdv
+     </div>      
   </div>
 </body>
 </html>

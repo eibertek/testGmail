@@ -8,9 +8,9 @@ var SCOPES = ['https://www.googleapis.com/auth/gmail.compose',
 'https://www.googleapis.com/auth/gmail.send'];
 
 //Archivo donde guarda el token para autorizar              
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-process.env.USERPROFILE) + '/.credentials/';
-var TOKEN_PATH = TOKEN_DIR + 'gmail-nodejs-quickstart.json';              
+//var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_DIR = __dirname + '/.credentials/';
+var TOKEN_PATH = TOKEN_DIR + 'gmail-nodejs.json';              
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -45,7 +45,7 @@ exports.authorize = function(credentials, callback) {
  * @param {getEventsCallback} callback The callback to call with the authorized
  *     client.
  */
-exports.getNewToken = function(oauth2Client, callback) {
+function getNewToken(oauth2Client, callback) {
   var authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES
@@ -74,7 +74,7 @@ exports.getNewToken = function(oauth2Client, callback) {
  *
  * @param {Object} token The token to store to disk.
  */
-exports.storeToken = function(token) {
+function storeToken(token) {
   try {
     fs.mkdirSync(TOKEN_DIR);
   } catch (err) {
