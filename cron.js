@@ -20,15 +20,13 @@ const cronBirthdays = (callback) => {
       }
   });
 }
-cronBirthdays(mailsender.sendBirthdayMail);
-//mailsender.sendBirthdayMail();
+
 /**
  * 
  */
 //new CronJob("*/20 * * * * *", function() {
 //  console.log('You will see this message every minute');
-//  cronBirthdays();
-  //mailsender.sendBirthdayMail();
+//  cronBirthdays(mailsender.sendBirthdayMail);
 //}, null, true);
-
+cronBirthdays(mailsender.sendBirthdayMail);
 

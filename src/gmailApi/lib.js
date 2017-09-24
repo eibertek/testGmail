@@ -19,7 +19,7 @@ var TOKEN_PATH = TOKEN_DIR + 'gmail-nodejs.json';
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-exports.authorize = function(credentials, callback) {
+function authorize(credentials, callback) {
   var clientSecret = credentials.web.client_secret;
   var clientId = credentials.web.client_id;
   var redirectUrl = credentials.web.redirect_uris[0];
@@ -84,4 +84,10 @@ function storeToken(token) {
   }
   fs.writeFile(TOKEN_PATH, JSON.stringify(token));
   console.log('Token stored to ' + TOKEN_PATH);
+}
+
+module.exports = {
+  storeToken,
+  getNewToken,
+  authorize,
 }
