@@ -21,6 +21,7 @@ var auth = function(){
     sendMail(authData);      
   });    
 }
+//refactor to https://medium.com/@pandeysoni/nodemailer-service-in-node-js-using-smtp-and-xoauth2-7c638a39a37e
   var sendMail = function(auth){
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',

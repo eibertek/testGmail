@@ -15,6 +15,8 @@ class Employee extends React.Component {
             birthday: '',
             startDay: '',
             picture: '',
+            project: '',
+            slackname:'',
         };
         this.onChangeInput = this.onChangeInput.bind(this);
         this.add = this.add.bind(this);
@@ -31,7 +33,9 @@ class Employee extends React.Component {
             lastname: this.state.lastname, 
             birthday: this.state.birthday, 
             startDay: this.state.startDay,
-            picture: this.state.picture
+            picture: this.state.picture,
+            project: this.state.project,
+            slackname:this.state.slackname,            
           };
         if(this.props.status === 'MODIFY_EMPLOYEE_PENDING') {
             UpdateEmployee((result)=>{ console.log(result)}, payload);
@@ -52,6 +56,8 @@ class Employee extends React.Component {
             birthday: '',
             startDay: '',
             picture: '',
+            project: '',
+            slackname: '',            
         });        
     }
 
@@ -69,6 +75,8 @@ class Employee extends React.Component {
                 birthday: props.employeeData.birthday ? props.employeeData.birthday : '',
                 startDay: props.employeeData.startDay ? props.employeeData.startDay : '',
                 picture: props.employeeData.picture ? props.employeeData.picture : '',
+                project: props.employeeData.project ? props.employeeData.project : '',
+                slackname:props.employeeData.slackname ? props.employeeData.slackname : '',                
             });
         }
     }
@@ -95,6 +103,8 @@ class Employee extends React.Component {
           <div><label htmlFor="lastname">Apellido: </label><input value={this.state.lastname} onChange={this.onChangeInput} id="lastname" placeholder="apellido"/></div>
           <div><label htmlFor="birthday">Cumpleaños: </label><input value={this.state.birthday} onChange={this.onChangeInput} id="birthday" placeholder="cumpleaños"/></div>
           <div><label htmlFor="startDay">Dia de ingreso: </label><input value={this.state.startDay} onChange={this.onChangeInput} id="startDay" placeholder="dia que ingreso"/></div>
+          <div><label htmlFor="project">Proyecto: </label><input value={this.state.project} onChange={this.onChangeInput} id="project" placeholder="Proyecto al que pertenece"/></div>
+          <div><label htmlFor="slackname">Slack Name: </label><input value={this.state.slackname} onChange={this.onChangeInput} id="slackname" placeholder="Nombre en Slack"/></div>
           {actualFoto}
           </div>
           <div className="imgUploader"><ImageUploader

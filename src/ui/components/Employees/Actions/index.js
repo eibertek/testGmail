@@ -24,7 +24,6 @@ export const modify_employee_cancel = () => {
 
 /* delete employee actions */
 export const delete_employee_pending = (employee) => {
-  console.log(employee);
   return { type:'DELETE_EMPLOYEE_PENDING', status:'DELETE_EMPLOYEE_PENDING', employeeData: employee}
 }
 export const delete_employee_success = () => {

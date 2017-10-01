@@ -21,24 +21,24 @@ export const getEmployees =(callback, ...additional) => {
 }
 
 export const postEmployee =(callback, data = {}) => {
-    const {id, name, lastname, birthday, startDay, picture} = data;
+    const {id, name, lastname, birthday, startDay, picture, project, slackname} = data;
     return Request({
         url: URL+EMPLOYEES,
         type:'POST',
         body: {
-            id, name, lastname, birthday, startDay, picture
+            id, name, lastname, birthday, startDay, picture, project, slackname
         },
         callback: callback
     })
 }
 
 export const UpdateEmployee =(callback, data = {}) => {
-    const {id, name, lastname, birthday, startDay, picture} = data;
+    const {id, name, lastname, birthday, startDay, picture, project, slackname} = data;
     return Request({
         url: URL+EMPLOYEES+'/'+id,
         type:'PUT',
         body: {
-            name, lastname, birthday, startDay, picture
+            name, lastname, birthday, startDay, picture, project, slackname
         },
         callback: callback
     })
