@@ -22,10 +22,10 @@ function createBirthdayImg(callback) {
             }   
             return urlToImage('http://localhost:8080/template/', 'img/birthdays.jpg',{ width:600, height:600,maxTimeout: 1000 * 10, verbose: true}).then(function() {
             }).then((status)=>{
-                 console.log(status);   
-                 callback();
+                 console.log('Imagen Creada, Enviando mail!');   
+                 return callback();
             }).catch(function(err) {
-                console.error(err);
+                console.error('Error al intentar crear imagen', err);
             });        
         });
     });

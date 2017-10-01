@@ -1,7 +1,7 @@
 var CronJob = require('cron').CronJob;
 var fetch = require('isomorphic-fetch');
 var moment = require('moment');
-var mailsender = require('./src/gmailApi/auth.js');
+var mailsender = require('./src/gmailApi/sendmail.js');
 var createImage = require('./imgtourl.js');
 const cronBirthdays = (callback) => {
   fetch('http://localhost:3000/employees')
@@ -15,8 +15,8 @@ const cronBirthdays = (callback) => {
         return (birthday.date() === today.date() && birthday.month() === today.month());
       });
       if( employees.length>0){
-        createImage(callback);
-        return console.log('Sent...');
+        console.log('Enviando mail por ', employees.length, ' empleados');
+        return createImage(callback);
       }
   });
 }
@@ -28,5 +28,6 @@ const cronBirthdays = (callback) => {
 //  console.log('You will see this message every minute');
 //  cronBirthdays(mailsender.sendBirthdayMail);
 //}, null, true);
-cronBirthdays(mailsender.sendBirthdayMail);
+mailsender.sendBirthdayMail();
+//cronBirthdays(mailsender.sendBirthdayMail);
 
